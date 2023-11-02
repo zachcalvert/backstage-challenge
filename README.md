@@ -10,3 +10,6 @@
 5. `./manage.py runserver`
 
 The difference endpoint will then be available at: http://localhost:8000/api/difference?number=10
+
+### Running the tests
+1. `./manage.py test`
