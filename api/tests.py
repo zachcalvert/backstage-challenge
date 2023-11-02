@@ -5,6 +5,7 @@ from django.test.client import Client
 from django.urls import reverse
 
 from api.functions import sum_of_squares, square_of_sums
+from api.models import DifferenceRequest
 
 
 class SumOfSquaresTestCase(TestCase):
@@ -29,17 +30,21 @@ class DifferenceTestCase(TestCase):
         self.url = reverse("difference")
 
     def test_difference(self):
+        assert DifferenceRequest.objects.count() == 0
+
         url = self.url + "?number=10"
 
         response = self.client.get(url)
         assert response.status_code == 200
 
         content = json.loads(response.content)
-        assert set(content.keys()) == {'datetime', 'number', 'difference'}
+        assert set(content.keys()) == {'datetime', 'difference', 'last_datetime', 'number', 'occurrences'}
         assert content["difference"] == 2640
+        assert DifferenceRequest.objects.count() == 1
 
     def test_bad_value(self):
         url = self.url + "?number=x"
 
         response = self.client.get(url)
         assert response.status_code == 400
+        assert DifferenceRequest.objects.count() == 0
