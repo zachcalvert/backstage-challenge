@@ -9,7 +9,8 @@
 4. `./manage.py migrate`
 5. `./manage.py runserver`
 
-The difference endpoint will then be available at: http://localhost:8000/api/difference?number=10
+The difference endpoint is available at: http://localhost:8000/api/difference?number=10  
+The pythagorean triplet endpoint is available at: http://localhost:8000/api/pythagorean_triplet?a=3&b=4&c=5
 
 ### Running the tests
 1. `./manage.py test`
