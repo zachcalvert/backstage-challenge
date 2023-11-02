@@ -23,12 +23,13 @@ def difference(request):
         difference = abs(sum_of_squares - square_of_sums)
         last_datetime = None
 
-    DifferenceRequest.objects.create(number=number, difference=difference)
+    difference_request = DifferenceRequest.objects.create(number=number, difference=difference)
+    occurrences = DifferenceRequest.objects.filter(number=number).count()
 
     return JsonResponse({
-        "datetime": timezone.now(),
+        "datetime": difference_request.created_at,
         "difference": difference,
         "number": number,
-        "occurrences": DifferenceRequest.objects.count(),
+        "occurrences": occurrences,
         "last_datetime": last_datetime
     })
